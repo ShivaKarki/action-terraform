@@ -15,11 +15,10 @@ runs:
     - name: Checkout
       uses: actions/checkout@v2
 
-    # Install the preferred version of Terraform CLI 
+     # Install the latest version of Terraform CLI and configure the Terraform CLI configuration file with a Terraform Cloud user API token
     - name: Setup Terraform
-      uses: hashicorp/setup-terraform@v1
+      uses: hashicorp/setup-terraform@v1.0.1
       with:
-        terraform_version: 1.0.10
         cli_config_credentials_token: ${{ secrets.TF_TOKEN }}
         
     - name: Terraform Init
