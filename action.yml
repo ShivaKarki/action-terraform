@@ -47,7 +47,15 @@ runs:
       id: plan
       run: terraform plan -no-color
       shell: bash
+
+     #returns whether a plan was successfully generated or not. 
+     #This step highlights whenever a plan fails because the "Terraform Plan" step continues on error.
+    - name: Terraform Plan Status
+      if: steps.plan.outcome == 'failure'
+      run: exit 1
+      shell: bash
       
+      #On push to master, build or change infrastructure according to Terraform configuration files
     - name: Terraform Apply
       if: github.ref == 'refs/heads/main' && github.event_name == 'push'
       run: terraform apply -auto-approve -input=false
