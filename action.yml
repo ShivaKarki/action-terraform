@@ -1,5 +1,5 @@
 name: 'terraform'
-description: 'Install terraform and login into teraform cloud and provision the resources in Azure'
+description: 'Install terraform, login into teraform cloud and provision the resources in Azure'
 inputs:
   TF_TOKEN:
     description: 'API key from Terraform cloud to login into Terraform'
