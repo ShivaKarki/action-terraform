@@ -5,6 +5,11 @@ inputs:
     description: 'API key from Terraform cloud to login into Terraform'
     required: true
     
+  ACTION_TOKEN:
+    description: 'A github-token'
+    required: true
+    
+    
  
 runs:
    
