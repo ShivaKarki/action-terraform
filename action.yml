@@ -25,10 +25,10 @@ runs:
         cli_config_credentials_token: ${{ inputs.TF_TOKEN }}
         
         
-    - name: Terraform Format
-      id: fmt
-      shell: bash
-      run: terraform fmt -check
+    # - name: Terraform Format
+    #   id: fmt
+    #   shell: bash
+    #   run: terraform fmt -check
         
     - name: Terraform Init
       id: init
