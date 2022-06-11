@@ -16,19 +16,18 @@ runs:
    using: composite 
    steps:
    
-     
-
      # Install the latest version of Terraform CLI and configure the Terraform CLI configuration file with a Terraform Cloud user API token
     - name: Setup Terraform
       uses: hashicorp/setup-terraform@v2
       with:
         cli_config_credentials_token: ${{ inputs.TF_TOKEN }}
+        cli_config_credentials_hostname: app.terraform.io
+        terraform_version: 1.2.2
         
         
-    # - name: Terraform Format
-    #   id: fmt
-    #   shell: bash
-    #   run: terraform fmt -check
+    - name: Terraform fmt
+      id: fmt
+      run: terraform fmt -recursive
         
     - name: Terraform Init
       id: init
@@ -53,10 +52,14 @@ runs:
       run: exit 1
       shell: bash
       
-      #On push to master, build or change infrastructure according to Terraform configuration files
     - name: Terraform Apply
-      if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-      run: terraform apply -auto-approve -input=false
-      shell: bash
+      id: apply
+      run: terraform apply -auto-approve -no-color
+      
+#       #On push to master, build or change infrastructure according to Terraform configuration files
+#     - name: Terraform Apply
+#       if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+#       run: terraform apply -auto-approve -input=false
+#       shell: bash
            
   
